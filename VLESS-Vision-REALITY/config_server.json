@@ -1,55 +1,37 @@
 {
-    "log": {
-        "loglevel": "warning"
-    },
-    "inbounds": [
-        {
-            "listen": "0.0.0.0",
-            "port": 443,
-            "protocol": "vless",
-            "settings": {
-                "clients": [
-                    {
-                        "id": "chika", // 长度为 1-30 字节的任意字符串，或执行 xray uuid 生成
-                        "flow": "xtls-rprx-vision"
-                    }
-                ],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "security": "reality",
-                "realitySettings": {
-                    "dest": "www.lovelive-anime.jp:443", // 目标网站最低标准：国外网站，支持 TLSv1.3、X25519 与 H2，域名非跳转用（主域名可能被用于跳转到 www）
-                    "serverNames": [ // 客户端可用的 serverName 列表，暂不支持 * 通配符，在 Chrome 里输入 "dest" 的网址 -> F12 -> 安全 -> F5 -> 主要来源（安全），填证书中 SAN 的值
-                        "www.lovelive-anime.jp",
-                        "lovelive-anime.jp"
-                    ],
-                    "privateKey": "2KZ4uouMKgI8nR-LDJNP1_MHisCJOmKGj9jUjZLncVU", // 执行 xray x25519 生成，填 "Private key" 的值
-                    "shortIds": [ // 客户端可用的 shortId 列表，可用于区分不同的客户端，0 到 f，长度为 2 的倍数，长度上限为 16，可留空，或执行 openssl rand -hex 1到8 生成
-                        "6ba85179e30d4fc2",
-                        "b9"
-                    ]
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "quic"
-                ]
-            }
+  "log": {
+    "loglevel": "warning"
+  },
+  "inbounds": [
+    {
+      "port": 443,
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "40d2d1ca-39e6-4b3b-810a-9e685262845d",
+            "level": 0
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "privateKey": "mA2KuiApjhLvEvYbU9kbQUPMsOe11eMOxqMFpzwkYmA",
+          "show": false,
+          "dest": "www.whatsapp.com:443",
+          "serverNames": ["whatsapp.com"],
+          "shortIds": ["ffffffffff"]
         }
-    ],
-    "outbounds": [
-        {
-            "protocol": "freedom",
-            "tag": "direct"
-        },
-        {
-            "protocol": "blackhole",
-            "tag": "block"
-        }
-    ]
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "settings": {}
+    }
+  ]
 }
