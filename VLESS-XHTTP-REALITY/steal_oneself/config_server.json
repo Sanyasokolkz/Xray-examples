@@ -1,73 +1,38 @@
 {
-    "log": {
-        "loglevel": "warning"
-    },
-    "inbounds": [
-        {
-            "listen": "@xhttp",
-            "protocol": "vless",
-            "settings": {
-                "decryption": "none",
-                "clients": [
-                    {
-                        "id": "chika"
-                    }
-                ]
-            },
-            "streamSettings": {
-                "network": "xhttp",
-                "xhttpSettings": {
-                    "path": "/lovelive"
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "quic"
-                ]
-            }
-        },
-        {
-            "listen": "0.0.0.0",
-            "port": 443,
-            "protocol": "vless",
-            "settings": {
-                "decryption": "none",
-                "fallbacks": [
-                    {
-                        "dest": "@xhttp"
-                    }
-                ]
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "security": "reality",
-                "realitySettings": {
-                    "target": "8001",
-                    "xver": 1, // 发送 PROXY protocol
-                    "serverNames": [
-                        "example.com", // 与 Nginx 配置中的 server_name 一致
-                        "chika.example.com"
-
-                    ],
-                    "privateKey": "",
-                    "shortIds": [
-                        ""
-                    ]
-                }
-            }
+  "log": {
+    "loglevel": "warning"
+  },
+  "inbounds": [
+    {
+      "port": 443,
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "c8117477-1eae-4f29-a950-54c0b19e6ef4", 
+            "level": 0
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "show": false,
+          "dest": "www.whatsapp.com:443",
+          "xver": 0,
+          "serverNames": ["whatsapp.com"],
+          "privateKey": "QGFdTG9aNVoVDUR5SjUG8jKELPKGeua9as_UidERiWE", 
+          "shortIds": ["ffffffffff"]
         }
-    ],
-    "outbounds": [
-        {
-            "protocol": "freedom",
-            "tag": "direct"
-        },
-        {
-            "protocol": "blackhole",
-            "tag": "block"
-        }
-    ]
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "settings": {}
+    }
+  ]
 }
