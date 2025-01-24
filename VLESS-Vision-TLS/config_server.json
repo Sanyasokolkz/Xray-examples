@@ -1,65 +1,38 @@
 {
-    "log": {
-        "loglevel": "warning"
-    },
-    "inbounds": [
-        {
-            "listen": "0.0.0.0",
-            "port": 443,
-            "protocol": "vless",
-            "settings": {
-                "clients": [
-                    {
-                        "id": "chika", // 长度为 1-30 字节的任意字符串，或执行 xray uuid 生成
-                        "flow": "xtls-rprx-vision"
-                    }
-                ],
-                "decryption": "none",
-                "fallbacks": [
-                    {
-                        "dest": "8001",
-                        "xver": 1 // 发送 PROXY protocol
-                    },
-                    {
-                        "alpn": "h2",
-                        "dest": "8002",
-                        "xver": 1 // 发送 PROXY protocol
-                    }
-                ]
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "security": "tls",
-                "tlsSettings": {
-                    "rejectUnknownSni": true,
-                    "minVersion": "1.2",
-                    "certificates": [
-                        {
-                            "ocspStapling": 3600,
-                            "certificateFile": "/etc/ssl/private/fullchain.cer",
-                            "keyFile": "/etc/ssl/private/private.key"
-                        }
-                    ]
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "quic"
-                ]
-            }
+  "log": {
+    "loglevel": "warning"
+  },
+  "inbounds": [
+    {
+      "port": 443,
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "c8117477-1eae-4f29-a950-54c0b19e6ef4", 
+            "level": 0
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "show": false,
+          "dest": "www.whatsapp.com:443",
+          "xver": 0,
+          "serverNames": ["whatsapp.com"],
+          "privateKey": "QGFdTG9aNVoVDUR5SjUG8jKELPKGeua9as_UidERiWE", 
+          "shortIds": ["ffffffffff"]
         }
-    ],
-    "outbounds": [
-        {
-            "protocol": "freedom",
-            "tag": "direct"
-        },
-        {
-            "protocol": "blackhole",
-            "tag": "block"
-        }
-    ]
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "settings": {}
+    }
+  ]
 }
